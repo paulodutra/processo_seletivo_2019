@@ -19,18 +19,35 @@ class SiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($page = 1)
+    public function index(Request $request, $page = 1, $search = false)
     {
-        $title = 'CNM - Desafio 2 - Noticias';
-        $news = $this->getNews();
-        $pages = ceil($news->total_noticias / 15);
-        return view('site.index', compact('title', 'news', 'pages' ));
+       if(count($request->query()) >= 1)
+       {
+        
+           if(array_key_exists('page', $request->query()))
+           {
+             $page = $request->query()['page'];
+           }
+
+           if(array_key_exists('pesquisa', $request->query()))
+           {
+            $search = $request->query()['pesquisa'];
+           }
+
+       }
+
+       $title = 'CNM - Desafio 2 - Noticias';
+       $news = $this->getNews($page, $search);
+       $pages = ceil($news->total_noticias / 15);
+       return view('site.index', compact('title', 'news', 'pages', 'page'  ));
     }
 
-   public function getNews()
+   public function getNews(int $page, $search = false)
    {
+        $url = ( $search ? "/webservice/noticias?pesquisa={$search}" : "/webservice/noticias?page={$page}");
+       
         $client = new Client(['base_uri' => 'http://www.marcha.cnm.org.br']);
-        $request = $client->request('GET','/webservice/noticias', 
+        $request = $client->request('GET', $url, 
         [
             ['http_errors' =>false],
         ]);

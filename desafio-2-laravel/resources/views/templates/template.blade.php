@@ -8,7 +8,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{{ $title or 'Desafio 2'}}</title>
+  <title>Processo seletivo CNM - Desafio 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Processo seletivo CNM - Desafio 2">
   <meta name="author" content="Paulo Dutra - http://paulodutrainfo.com.br/">

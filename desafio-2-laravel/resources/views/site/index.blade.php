@@ -9,7 +9,7 @@
 
         <form action="" class="form-group row">
           <div class="col-12 busca">
-            <input type="text"  class="form-control col-8" placeholder="Digite sua busca">
+            <input type="text" name="pesquisa" class="form-control col-8" placeholder="Digite sua busca">
             <button class="btn btn-primary col-2"> Buscar </button>
           </div>
           
@@ -30,10 +30,14 @@
           <hr>
         @endforeach
         <ul class="pagination">
-            <li class="active page-item"><a class="page-link"href="?page=1">1</a></li>
-            @for ($i = 2; $i <= $pages; $i++)
-              <li class="page-item"><a class="page-link"href="?page={{$i}}">{{$i}}</a></li>
-            @endfor                             
+            @for ($i = 1; $i <= $pages; $i++)
+              @if($i == $page)
+                <li class="active page-item"><a class="page-link"href="?page={{$i}}">{{$i}}</a></li>
+              @else
+               <li class="page-item"><a class="page-link"href="?page={{$i}}">{{$i}}</a></li>
+              @endif
+              
+            @endfor                        
             <li class="page-item">
               <a class="page-link" href="" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
